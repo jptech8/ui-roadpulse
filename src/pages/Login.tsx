@@ -8,6 +8,7 @@ import {
   Link,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/userApi.service";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,7 +18,20 @@ const Login = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/home");
+
+    try {
+      const data = await loginUser(email, password);
+  
+     
+      navigate("/home");
+  
+    } catch (error: any) {
+      console.error(error);
+  
+      // ✅ display readable message
+      alert(error.message || "Something went wrong");
+    }
+   
   };
 
   return (
