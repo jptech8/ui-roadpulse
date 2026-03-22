@@ -1,31 +1,32 @@
-import { AppBar, Toolbar, Typography, Box, Avatar, IconButton } from "@mui/material";
-import SettingsIcon from "@mui/icons-material/Settings";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
-const Header = () => {
-  const user = {
-    name: "James Sullivan",
-  };
-
+export default function Header({
+  drawerWidth,
+  onMenuClick,
+  isMobile,
+}: any) {
   return (
-    <AppBar position="static" sx={{ background: "#1976d2" }}>
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        
-        {/* Title */}
-        <Typography variant="h6">Posts</Typography>
-
-        {/* Right side */}
-        <Box display="flex" alignItems="center" gap={2}>
-          <IconButton color="inherit">
-            <SettingsIcon />
+    <AppBar
+      position="fixed"
+      sx={{
+        width: isMobile ? "100%" : `calc(100% - ${drawerWidth}px)`,
+        ml: isMobile ? 0 : `${drawerWidth}px`,
+      }}
+    >
+      <Toolbar>
+        {isMobile && (
+          <IconButton color="inherit" edge="start" onClick={onMenuClick}>
+            <MenuIcon />
           </IconButton>
-
-          <Typography>{user.name}</Typography>
-
-          <Avatar>{user.name.charAt(0)}</Avatar>
-        </Box>
+        )}
+        <Typography variant="h6">My App</Typography>
       </Toolbar>
     </AppBar>
   );
-};
-
-export default Header;
+}

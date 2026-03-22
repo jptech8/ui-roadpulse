@@ -1,27 +1,77 @@
 import {
+  Drawer,
+  List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
+  Box,
 } from "@mui/material";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Sidebar = () => {
-  const navigate = useNavigate();
+export default function Sidebar({
+  drawerWidth,
+  isMobile,
+  mobileOpen,
+  onClose,
+}: any) {
+  const drawerContent = (
+    <Box>
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/home" onClick={onClose}>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/about" onClick={onClose}>
+            <ListItemText primary="About" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton component={Link} to="/contact" onClick={onClose}>
+            <ListItemText primary="Contact" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
 
   return (
     <>
-      <ListItem disablePadding>
-        <ListItemButton onClick={() => navigate("/home")}>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItemButton>
-      </ListItem>
+      {/* MOBILE */}
+      {isMobile && (
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={onClose}
+          ModalProps={{ keepMounted: true }}
+          sx={{
+            "& .MuiDrawer-paper": { width: drawerWidth },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+      )}
+
+      {/* DESKTOP */}
+      {!isMobile && (
+        <Drawer
+          variant="permanent"
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+          open
+        >
+          {drawerContent}
+        </Drawer>
+      )}
     </>
   );
-};
-
-export default Sidebar;
+}

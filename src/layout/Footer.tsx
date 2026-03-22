@@ -1,20 +1,18 @@
 import { Box, Typography } from "@mui/material";
 
-const Footer = () => {
+export default function Footer() {
   return (
     <Box
       sx={{
         textAlign: "center",
         py: 2,
-        background: "#f1f5f9",
-        borderTop: "1px solid #ddd",
+        backgroundColor: "#1976d2",
+        color: "#fff",
       }}
     >
       <Typography variant="body2">
-        © 2026 RoadPulse. All rights reserved.
+        © 2026 My App
       </Typography>
     </Box>
   );
-};
-
-export default Footer;
+}
