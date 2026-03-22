@@ -11,7 +11,7 @@ export default function Footer() {
       }}
     >
       <Typography variant="body2">
-        © 2026 My App
+        © 2026 Road Pulse
       </Typography>
     </Box>
   );

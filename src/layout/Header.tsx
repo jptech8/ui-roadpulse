@@ -25,7 +25,7 @@ export default function Header({
             <MenuIcon />
           </IconButton>
         )}
-        <Typography variant="h6">My App</Typography>
+        <Typography variant="h6">RoadPulse</Typography>
       </Toolbar>
     </AppBar>
   );
