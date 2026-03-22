@@ -14,12 +14,14 @@ import {
   CircularProgress,
   InputBase,
   IconButton,
+  Button, // ✅ added
 } from "@mui/material";
 
 import SearchIcon from "@mui/icons-material/Search";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add"; // ✅ added
 
 import { getAllVehicles } from "../services/vehicleApi.service";
 import Modal from "../component/Model";
@@ -43,7 +45,7 @@ const Home = () => {
   // Modal state
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<any>(null);
-  const [mode, setMode] = useState<"view" | "edit" | "delete">("view");
+  const [mode, setMode] = useState<"view" | "edit" | "delete" | "add">("view"); // ✅ updated
 
   const columns = [
     { id: "vehicleNumber", label: "Vehicle No" },
@@ -80,7 +82,6 @@ const Home = () => {
     }
   };
 
-  // 🔍 + 🎛 Filters
   const applyFilters = () => {
     let data = [...vehicles];
 
@@ -102,7 +103,6 @@ const Home = () => {
     setPage(0);
   };
 
-  // ↕️ Sorting
   const handleSort = (property: string) => {
     const isAsc = orderBy === property && order === "asc";
     const newOrder = isAsc ? "desc" : "asc";
@@ -122,7 +122,6 @@ const Home = () => {
     setFilters({ ...filters, [key]: value });
   };
 
-  // Pagination
   const handleChangePage = (_: any, newPage: number) => {
     setPage(newPage);
   };
@@ -137,10 +136,17 @@ const Home = () => {
     page * rowsPerPage + rowsPerPage
   );
 
-  // Modal handlers
+  // ✅ OPEN MODAL (VIEW/EDIT/DELETE)
   const handleOpen = (row: any, type: any) => {
     setSelectedRow(row);
     setMode(type);
+    setOpen(true);
+  };
+
+  // ✅ ADD BUTTON HANDLER
+  const handleAdd = () => {
+    setSelectedRow(null);
+    setMode("add");
     setOpen(true);
   };
 
@@ -159,14 +165,40 @@ const Home = () => {
 
   return (
     <Box sx={{ p: 3, background: "#f4f7fb" }}>
-      <Typography variant="h6" fontWeight="bold" mb={2}>
-        Vehicle Details
-      </Typography>
+      
+      {/* ✅ HEADER WITH ADD BUTTON */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 2,
+        }}
+      >
+        <Typography variant="h6" fontWeight="bold">
+          Vehicle Details
+        </Typography>
 
-      <TableContainer component={Paper} sx={{ borderRadius: 3, overflowX: "auto" ,maxHeight: "67vh",}}>
-        <Table  size="small">
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={handleAdd}
+        >
+          Add Vehicle
+        </Button>
+      </Box>
 
-          {/* 🔍 GLOBAL SEARCH */}
+      <TableContainer
+        component={Paper}
+        sx={{
+          borderRadius: 3,
+          overflowX: "auto",
+          maxHeight: "67vh",
+        }}
+      >
+        <Table size="small">
+
+          {/* SEARCH */}
           <TableHead>
             <TableRow>
               <TableCell colSpan={columns.length + 1}>
@@ -182,7 +214,7 @@ const Home = () => {
               </TableCell>
             </TableRow>
 
-            {/* COLUMN HEADERS */}
+            {/* HEADERS */}
             <TableRow sx={{ background: "#3b82f6" }}>
               {columns.map((col) => (
                 <TableCell key={col.id} sx={{ color: "#fff" }}>
@@ -199,7 +231,7 @@ const Home = () => {
               <TableCell sx={{ color: "#fff" }}>Actions</TableCell>
             </TableRow>
 
-            {/* COLUMN FILTERS */}
+            {/* FILTERS */}
             <TableRow>
               {columns.map((col) => (
                 <TableCell key={col.id}>
@@ -216,52 +248,46 @@ const Home = () => {
             </TableRow>
           </TableHead>
 
-          {/* TABLE BODY */}
+          {/* BODY */}
           <TableBody>
             {paginatedData.map((row, index) => (
               <TableRow key={index} hover>
                 {columns.map((col) => (
-                  <TableCell key={col.id}>
-                    {row[col.id]}
-                  </TableCell>
+                  <TableCell key={col.id}>{row[col.id]}</TableCell>
                 ))}
 
-                {/* ACTIONS */}
-                
                 <TableCell>
-  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-    
-    <IconButton size="small" color="primary" onClick={() => handleOpen(row, "view")}>
-      <VisibilityIcon fontSize="small" />
-    </IconButton>
+                  <Box sx={{ display: "flex", gap: 1 }}>
+                    <IconButton size="small" color="primary" onClick={() => handleOpen(row, "view")}>
+                      <VisibilityIcon fontSize="small" />
+                    </IconButton>
 
-    <IconButton size="small" color="warning" onClick={() => handleOpen(row, "edit")}>
-      <EditIcon fontSize="small" />
-    </IconButton>
+                    <IconButton size="small" color="warning" onClick={() => handleOpen(row, "edit")}>
+                      <EditIcon fontSize="small" />
+                    </IconButton>
 
-    <IconButton size="small" color="error" onClick={() => handleOpen(row, "delete")}>
-      <DeleteIcon fontSize="small" />
-    </IconButton>
-
-  </Box>
-</TableCell>
+                    <IconButton size="small" color="error" onClick={() => handleOpen(row, "delete")}>
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  </Box>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
 
         </Table>
+
         <Box sx={{ position: "sticky", bottom: 0, background: "#fff" }}>
-        {/* PAGINATION */}
-        <TablePagination
-          component="div"
-          count={filtered.length}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-         </Box>
+          <TablePagination
+            component="div"
+            count={filtered.length}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            rowsPerPageOptions={[5, 10, 25]}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Box>
       </TableContainer>
 
       {/* MODAL */}
