@@ -159,12 +159,12 @@ const Home = () => {
 
   return (
     <Box sx={{ p: 3, background: "#f4f7fb" }}>
-      <Typography variant="h5" fontWeight="bold" mb={2}>
+      <Typography variant="h6" fontWeight="bold" mb={2}>
         Vehicle Details
       </Typography>
 
-      <TableContainer component={Paper} sx={{ borderRadius: 3, overflowX: "auto" }}>
-        <Table size="small">
+      <TableContainer component={Paper} sx={{ borderRadius: 3, overflowX: "auto" ,maxHeight: "67vh",}}>
+        <Table  size="small">
 
           {/* 🔍 GLOBAL SEARCH */}
           <TableHead>
@@ -250,17 +250,18 @@ const Home = () => {
           </TableBody>
 
         </Table>
-
+        <Box sx={{ position: "sticky", bottom: 0, background: "#fff" }}>
         {/* PAGINATION */}
         <TablePagination
           component="div"
           count={filtered.length}
           page={page}
           rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[10, 25, 50]}
+          rowsPerPageOptions={[5, 10, 25]}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+         </Box>
       </TableContainer>
 
       {/* MODAL */}
