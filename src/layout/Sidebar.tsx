@@ -24,16 +24,12 @@ export default function Sidebar({
         </ListItem>
 
         <ListItem disablePadding>
-          <ListItemButton component={Link} to="/about" onClick={onClose}>
-            <ListItemText primary="About" />
-          </ListItemButton>
-        </ListItem>
+  <ListItemButton component={Link} to="/users" onClick={onClose}>
+    <ListItemText primary="User Management" />
+  </ListItemButton>
+</ListItem>
 
-        <ListItem disablePadding>
-          <ListItemButton component={Link} to="/contact" onClick={onClose}>
-            <ListItemText primary="Contact" />
-          </ListItemButton>
-        </ListItem>
+      
       </List>
     </Box>
   );

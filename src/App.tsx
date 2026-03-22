@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import MainLayout from "./layout/MainLayout";
-
+import User from "./pages/User"
 function App() {
   const isAuthenticated = true; // 
   return (
@@ -23,7 +23,7 @@ function App() {
           }
         >
           <Route path="home" element={<Home />} />
-      
+          <Route path="users" element={<User />} />
         </Route>
 
       </Routes>
