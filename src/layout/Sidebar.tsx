@@ -25,7 +25,7 @@ export default function Sidebar({
 
         <ListItem disablePadding>
   <ListItemButton component={Link} to="/users" onClick={onClose}>
-    <ListItemText primary="User Management" />
+    <ListItemText primary="User " />
   </ListItemButton>
 </ListItem>
 
