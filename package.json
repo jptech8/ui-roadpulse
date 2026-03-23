@@ -2,7 +2,7 @@
   "name": "ui-roadpulse",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jptech8.github.io/ui-reactjs",
+  "homepage": "https://jptech8.github.io/ui-roadpulse",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
