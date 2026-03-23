@@ -75,15 +75,16 @@ const Login = () => {
           </Typography>
 
           <Box
-            component="img"
-            src="/images/vehicle.png"
-            alt="Vehicle"
-            sx={{
-              width: { xs: 150, sm: 200, md: 250 }, // 🔥 responsive image
-              height: "auto",
-              mb: 3,
-            }}
-          />
+  component="img"
+  /* Add process.env.PUBLIC_URL before your path */
+  src={process.env.PUBLIC_URL + "/images/vehicle.png"} 
+  alt="Vehicle"
+  sx={{
+    width: { xs: 150, sm: 200, md: 250 },
+    height: "auto",
+    mb: 3,
+  }}
+/>
 
           <Typography variant="h6" mb={1}>
             Vehicle Tracking
