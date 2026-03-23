@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/ui-roadpulse/static/js/main.d132dd3c.js",
+    "index.html": "/ui-roadpulse/index.html",
+    "main.d132dd3c.js.map": "/ui-roadpulse/static/js/main.d132dd3c.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d132dd3c.js"
+  ]
+}
