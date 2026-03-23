@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
+import { BrowserRouter,HashRouter, Routes, Route,Navigate} from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import MainLayout from "./layout/MainLayout";
@@ -6,7 +6,7 @@ import User from "./pages/User"
 function App() {
   const isAuthenticated = true; // 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
 
         {/* Default Route */}
@@ -27,7 +27,7 @@ function App() {
         </Route>
 
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
